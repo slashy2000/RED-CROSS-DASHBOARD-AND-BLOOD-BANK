@@ -1,0 +1,511 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #f7f5f5;
+}
+
+.logo {
+    width: 100px;
+    height: auto;
+    float: left;
+    margin-right: 20px;
+}
+
+.last-updated {
+    font-size: 22px;
+    color: #777;
+    margin-top: 10px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Poppins', sans-serif;
+}
+
+header {
+    background-color: #b92f2f;
+    padding-left: 90px;
+    padding-right: 90px;
+    padding-bottom: 30px;
+    padding-top: 30px;
+    position: relative;
+}
+
+nav li.profile {
+    float: right;
+    margin-right: 10px;
+}
+
+nav li.profile a {
+    display: block;
+    color: #ffffff;
+    text-align: center;
+    padding: 20px;
+    text-decoration: none;
+    font-size: 24px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+nav li.profile a:hover,
+nav li.profile a.selected {
+    background-color: #393939;
+    color: rgba(255, 255, 255, 0.284);
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+nav li {
+    float: left;
+}
+
+nav li.login {
+    float: right;
+}
+
+nav li a {
+    display: block;
+    color: #ffffff;
+    text-align: center;
+    padding: 20px 20px;
+    text-decoration: none;
+    font-size: 24px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+nav li a:hover,
+nav li a.selected {
+    background-color: rgba(255, 255, 255, 0.284);
+    color: #e8e8e8;
+}
+
+nav li.login a {
+    padding-left: 24px;
+    padding-right: 24px;
+    border: 1px solid #ffffff;
+}
+
+nav li.login a:hover {
+    background-color: #ffffff;
+    color: #990000;
+}
+
+nav li.login a.selected {
+    background-color: #ffffff;
+    color: #990000;
+}
+
+/* Home */
+
+main {
+    text-align: center;
+    padding: 1px 0;
+}
+
+.center-container {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.center-image {
+    width: 63%;
+}
+
+h1 {
+    font-size: 36px;
+    /* Increased font size */
+    margin: 20px 0;
+}
+
+ul {
+    list-style-type: disc;
+    padding-left: 20px;
+    text-align: left;
+}
+
+/* Donate Now Button */
+.donate-btn {
+    display: inline-block;
+    background-color: #d22a33;
+    color: #ffffff;
+    padding: 20px 39px;
+    font-size: 24px;
+    /* Increased font size */
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    border-radius: 4px;
+    margin: 20px 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Request Now Button */
+.request-btn {
+    display: inline-block;
+    background-color: #362d2d;
+    color: #ffffff;
+    padding: 20px 39px;
+    font-size: 24px;
+    /* Increased font size */
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    border-radius: 4px;
+    margin: 20px 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* CHART */
+.charts-wrapper {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.chart-container {
+    width: 40%;
+    margin: 10px;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 990px;
+    /* Adjust the height as needed */
+}
+
+@media screen and (max-width: 768px) {
+    .chart-container {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .chart-container {
+        width: 100%;
+    }
+}
+
+.donate-btn:hover {
+    background-color: #807d7d;
+    color: #e8e8e8;
+}
+
+/* Bloodbank Page */
+/* h2 {
+    font-size: 24px;
+    margin: 20px 0;
+} */
+
+
+/* Total Blood */
+.total-blood-container {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.total-blood-container h2 {
+    font-size: 32px;
+    /* Increased font size */
+    margin-bottom: 16px;
+    color: #4a4a4a;
+}
+
+.total-blood-container p {
+    font-size: 56px;
+    /* Increased font size */
+    font-weight: bold;
+    margin: 0;
+    line-height: 1.2;
+    color: #de252a;
+}
+
+/* Bloodbank Card */
+
+.blood-cards-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: minmax(150px, auto);
+    gap: 16px;
+    padding: 16px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* The existing CSS for .blood-card, .blood-card-header, .blood-card-body, etc. */
+
+.blood-card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 200px;
+    margin: 12px;
+    overflow: hidden;
+}
+
+.blood-card-body p {
+    font-size: 16px;
+    margin: 0;
+}
+
+/* Donate Page Form */
+
+.donor-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 900px;
+}
+
+.donor-form label {
+    font-weight: bold;
+    margin-top: 16px;
+    text-align: left;
+}
+
+.donor-form input,
+.donor-form select {
+    margin-top: 4px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    width: 100%;
+}
+
+.donor-form button {
+    margin-top: 24px;
+}
+
+/* Login Page Form */
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 500px;
+}
+
+.login-form label {
+    font-weight: bold;
+    margin-top: 16px;
+    text-align: left;
+}
+
+.login-form input {
+    margin-top: 4px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    width: 100%;
+}
+
+.login-form button a {
+    margin-top: 24px;
+    text-decoration: none;
+    color: #fff;
+}
+
+/* Footer styles */
+footer {
+    background-color: #393939;
+    padding: 20px;
+    text-align: center;
+    color: #ffffff;
+    font-size: 14px;
+    border-top: 1px solid #ffffff;
+    margin-top: 500px;
+}
+
+footer p {
+    margin: 0;
+}
+
+.mission-vision-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 20px 0;
+}
+
+.mission,
+.vision {
+    background-color: #ffffff;
+    padding-left: 200px;
+    padding-right: 200px;
+    padding-top: 40px;
+    padding-bottom: 100px;
+    border-radius: 8px;
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 20%;
+}
+
+.mission h2,
+.vision h2 {
+    font-size: 50px;
+    /* Increased font size */
+    margin-bottom: 16px;
+    color: #4a4a4a;
+}
+
+.mission p,
+.vision p {
+    font-size: 28px;
+    line-height: 1.5;
+    color: #333333;
+}
+
+/* Responsive design for smaller screens */
+@media screen and (max-width: 768px) {
+
+    .mission,
+    .vision {
+        width: 100%;
+    }
+}
+
+.republic-acts-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.republic-act {
+    background-color: #ffffff;
+    padding: 120px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 60%;
+}
+
+.republic-act h2 {
+    font-size: 32px;
+    /* Increased font size */
+    margin-bottom: 16px;
+    color: #4a4a4a;
+}
+
+.republic-act p {
+    font-size: 22px;
+    line-height: 1.5;
+    color: #333333;
+}
+
+.republic-act a {
+    color: #de252a;
+    text-decoration: none;
+}
+
+.republic-act a:hover {
+    text-decoration: underline;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+  
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+  }
+  
+  .modal p {
+    margin: 0;
+    font-size: 18px;
+    color: #4a4a4a;
+  }
+  
+  .modal-buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+  }
+  
+  .modal-buttons button {
+    background-color: #362d2d;
+    color: #ffffff;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 4px;
+    margin-left: 10px;
+    cursor: pointer;
+  }
+  
+  .modal-buttons button:hover {
+    background-color: #443a3a;
+    color: #e8e8e8;
+  }
+  .btn-secondary {
+  /* Adjust the properties as needed */
+  width: 80px;
+  height: 30px;
+  font-size: 12px;
+  }
+
+    .btn-sm {
+  /* Adjust the properties as needed */
+  padding: 0.25rem 0.5rem;
+  font-size: 10px;
+    }
+  

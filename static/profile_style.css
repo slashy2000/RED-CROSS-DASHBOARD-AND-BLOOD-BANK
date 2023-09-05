@@ -1,0 +1,14 @@
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.profile-details {
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+.profile-details p {
+    margin-bottom: 10px;
+}

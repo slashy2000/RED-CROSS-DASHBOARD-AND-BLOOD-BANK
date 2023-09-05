@@ -1,0 +1,74 @@
+[
+  {
+    "fullname": "John Doe",
+    "age": 32,
+    "address": "123 Main St",
+    "email": "john@example.com",
+    "phone": "555-1234",
+    "bloodtype": "A+"
+  },
+  {
+    "fullname": "Jane Smith",
+    "age": 29,
+    "address": "456 Elm St",
+    "email": "jane@example.com",
+    "phone": "555-5678",
+    "bloodtype": "O+"
+  },
+  {
+    "fullname": "Jane Smith",
+    "age": 29,
+    "address": "456 Elm St",
+    "email": "jane@example.com",
+    "phone": "555-5678",
+    "bloodtype": "O+"
+  },
+  {
+    "fullname": "Jane Smith",
+    "age": 29,
+    "address": "456 Elm St",
+    "email": "jane@example.com",
+    "phone": "555-5678",
+    "bloodtype": "O+"
+  },
+  {
+    "fullname": "Jane Smith",
+    "age": 29,
+    "address": "456 Elm St",
+    "email": "jane@example.com",
+    "phone": "555-5678",
+    "bloodtype": "O+"
+  },
+  {
+    "fullname": "Jane Smith",
+    "age": 29,
+    "address": "456 Elm St",
+    "email": "jane@example.com",
+    "phone": "555-5678",
+    "bloodtype": "O+"
+  },
+  {
+    "fullname": "Jane Smith",
+    "age": 29,
+    "address": "456 Elm St",
+    "email": "jane@example.com",
+    "phone": "555-5678",
+    "bloodtype": "O+"
+  },
+  {
+    "fullname": "Jane Smith",
+    "age": 29,
+    "address": "456 Elm St",
+    "email": "jane@example.com",
+    "phone": "555-5678",
+    "bloodtype": "O+"
+  },
+  {
+    "fullname": "Jane Smith",
+    "age": 29,
+    "address": "456 Elm St",
+    "email": "jane@example.com",
+    "phone": "555-5678",
+    "bloodtype": "O+"
+  }
+]
