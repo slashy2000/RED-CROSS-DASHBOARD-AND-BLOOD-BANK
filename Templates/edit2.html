@@ -1,0 +1,29 @@
+{% extends "layout1.html" %}
+{% block body %}
+  <div class="row">
+    <div class="col-md-4 offset-md-4">
+      <div class="card card-body">
+        <form action="/update2/{{ donor.id }}" method="POST">
+                <div class="form-group">
+                     <label>
+                        <input type="text" name="name" value="{{ donor.name }}" class="form-control">
+                     </label>
+                </div>
+                     <div class="form-group">
+                        <label>
+                            <input type="text" name="bloodtype" value="{{ donor.bloodtype }}" class="form-control">
+                        </label>
+                     </div>
+                <div class="form-group">
+                    <label>
+                        <input type="date" name="date" placeholder="date" value="{{ today }}" class="form-control">
+                    </label>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block">Update</button>
+                </div>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}

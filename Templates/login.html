@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Blood Management System</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Roboto&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="{{url_for('static', filename='redcross.png')}}" sizes="10x10">
+</head>
+<body>
+	<main style="padding: 100px 0;">
+        <h2 style="color: #4a4a4a; font-size: 34px; font-weight:bold; margin:0;">Login</h2>
+        <div class="center-container">
+            <div class="links">
+				<a class="donate-btn" href="{{ url_for('index') }}" class="active">Back to Home</a>
+            </div>
+            <form action="{{ url_for('login') }}" method="post" class="login-form">
+                <label for="username">Email:</label>
+                <input type="text" id="username" placeholder="Username" name="username" required>
+                <label for="password">Password:</label>
+                <input type="password" name="password" placeholder="Password" id="password" required>
+                <div class="msg">{{ msg }}</div>
+                <button class="donate-btn" type="submit" value="Login"><a>Login</a></button>
+            </form>
+        </div>
+    </main>
+</body>
+</html>

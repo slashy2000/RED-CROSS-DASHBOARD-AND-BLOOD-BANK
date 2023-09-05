@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Blood Management System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style1.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='donorlog_table_style.css') }}">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Roboto&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="{{url_for('static', filename='redcross.png')}}" sizes="10x10">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+
+</head>
+
+<body>
+  <header>
+    <a href="{{url_for('admin')}}">
+      <img src="{{url_for('static', filename='redcross.png')}}" alt="logo" class="logo">
+    </a>
+    <nav>
+      <ul>
+          <li><a href="{{ url_for('admin') }}">Home</a></li>
+          <li><a href="{{ url_for('donorlog') }}" class="selected">Donor</a></li>
+          <li><a href="{{ url_for('manage') }}">Donor Log</a></li>
+          <li><a href="{{ url_for('patientlog') }}">Patient Accept Table</a></li>
+          <li><a href="{{ url_for('pmanage') }}">Patient Log</a></li>
+          <li><a href="{{ url_for('report') }}">Report</a></li>
+          <li class="login"><a href="{{ url_for('login') }}">Logout</a></li>
+          <li class="profile"><a href="{{ url_for('profile') }}">Profile</a></li>
+
+      </ul>
+    </nav>
+  </header>
+
+  <main style="padding: 0;">
+    <h2 style="color: #4a4a4a; font-size: 34px; font-weight:bold; margin-bottom:30px;">Donor Log</h2>
+    <div class="table-container">
+
+      <table id="example" style="width:100%">
+        <thead>
+          <tr>
+            <td>ID</td>
+            <td>Fullname</td>
+            <td>Age</td>
+            <td>Gender</td>
+            <td>Address</td>
+            <td>Email</td>
+            <td>Phone</td>
+            <td>BloodType</td>
+            <td>registered At</td>
+            <td>Action</td>
+          </tr>
+        </thead>
+        <tbody id="donor-table-body">
+          {% for data in donor %}
+          <tr>
+   <td>{{data.id}}</td>
+            <td>{{data.name}}</td>
+            <td>{{data.age}}</td>
+            <td>{{data.gender}}</td>
+            <td>{{ data.address }}</td>
+            <td>{{ data.email }}</td>
+            <td>{{data.phone}}</td>
+            <td>{{ data.bloodtype }}</td>
+            <td>{{ data.registeredAt }}</td>
+            <td width="130">
+              <a href="/edit/{{data.id}}" class="btn btn-secondary btn-sm">edit</a>
+              <a href="/delete/{{data.id}}" class="btn btn-danger btn-delete btn-sm">delete</a>
+              <a href="/edit2/{{data.id}}" class="btn btn-secondary btn-sm">Donate</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <h2 style="color: #4a4a4a; font-size: 34px; font-weight:bold; margin-bottom:30px;">Add Donor</h2>
+    <div
+      style="background-color: #ffffff; padding: 30px;  border-radius: 8px; text-align: center; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); width: 60%;  margin-left: auto; margin-right: auto; display: flex;  flex-direction: column;  align-items: center; margin-top:0; margin-bottom: 200px;">
+      {% with messages = get_flashed_messages()  %}
+      {% if messages %}
+      {% for message in messages %}
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      {% endfor %}
+      {% endif %}
+      {% endwith %}
+      <form action="{{ url_for('add_donor') }}" method="POST" class="donor-form">
+        <label for="fullname">Full Name:</label>
+        <input type="text" id="fullname" name="fullname" required>
+
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" required>
+
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender" required>
+            <option value="">Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select>
+
+        <label for="address">Address:</label>
+        <select id="address" name="address" required>
+          <option value="">Select Address Location</option>
+          <option value="Tanjay City">Tanjay City</option>
+          <option value="Dumaguete City">Dumaguete City</option>
+          <option value="Bais City">Bais City</option>
+          <option value="Bayawan City">Bayawan City</option>
+          <option value="Canlaon City">Canlaon City</option>
+          <option value="Municipality of Amlan">Municipality of Amlan</option>
+          <option value="Municipality of San Jose">Municipality of San Jose</option>
+          <option value="Municipality of Amlan">Municipality of Amlan</option>
+          <option value="Municipality of Bindoy">Municipality of Bindoy</option>
+          <option value="Municipality of Ayungon">Municipality of Ayungon</option>
+          <option value="Municipality of Basay">Municipality of Basay</option>
+          <option value="Municipality of Dauin">Municipality of Dauin</option>
+          <option value="Municipality of Guihulngan">Municipality of Guihulngan</option>
+          <option value="Municipality of Jimalalud">Municipality of Jimalalud</option>
+          <option value="Municipality of La Libertad">Municipality of La Libertad</option>
+          <option value="Municipality of Mabinay">Municipality of Mabinay</option>
+          <option value="Municipality of Manjuyod">Municipality of Manjuyod</option>
+          <option value="Municipality of Pamplona">Municipality of Pamplona</option>
+          <option value="Municipality of Santa Catalina">Municipality of Santa Catalina</option>
+          <option value="Municipality of Siaton">Municipality of Siaton</option>
+          <option value="Municipality of Sibulan">Municipality of Sibulan</option>
+          <option value="Municipality of Tayasan">Municipality of Tayasan</option>
+          <option value="Municipality of Valencia">Municipality of Valencia</option>
+          <option value="Municipality of Vallehermoso">Municipality of Vallehermoso</option>
+          <option value="Municipality of Zamboanguita">Municipality of Zamboanguita</option>
+         </select>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="phone">Phone:</label>
+        <input type="tel" id="phone" name="phone" required>
+
+        <label for="registeredAt">Registered At:</label>
+        <input type="date" id="registeredAt" name="registeredAt" required>
+
+        <label for="bloodtype">Blood Type:</label>
+        <select id="bloodtype" name="bloodtype" required>
+          <option value="">Select blood type</option>
+          <option value="A+">A+</option>
+          <option value="A-">A-</option>
+          <option value="B+">B+</option>
+          <option value="B-">B-</option>
+          <option value="AB+">AB+</option>
+          <option value="AB-">AB-</option>
+          <option value="O+">O+</option>
+          <option value="O-">O-</option>
+        </select>
+
+        <button type="submit" class="donate-btn" id="submitBtn">Submit</button>
+      </form>
+    </div>
+
+  </main>
+
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <p>Are you sure you want to submit the form?</p>
+      <div class="modal-buttons">
+        <button id="cancelBtn">Cancel</button>
+        <button id="confirmBtn">Submit</button>
+      </div>
+    </div>
+  </div>
+
+  
+  <script>
+const btnDelete= document.querySelectorAll('.btn-delete');
+if(btnDelete) {
+  const btnArray = Array.from(btnDelete);
+  btnArray.forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      if(!confirm('Are you sure you want to delete it?')){
+        e.preventDefault();
+      }
+    });
+  })
+}
+
+$(document).ready(function() {
+    $('#example').DataTable({
+      "aLengthMenu": [[3, 5, 10, 25, -1], [3, 5, 10, 25, "All"]],
+        "iDisplayLength": 3
+       }
+    );
+} );  </script>
+
+
+
+  <footer>
+    <p>© 2023 Blood Management System. All rights reserved.</p>
+  </footer>
+</body>
+
+</html>

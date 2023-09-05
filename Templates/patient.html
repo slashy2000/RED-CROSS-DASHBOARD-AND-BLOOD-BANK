@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Blood Management System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style1.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='donors_table_style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Roboto&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="{{url_for('static', filename='redcross.png')}}" sizes="10x10">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+    <script type="text/javascript" charset="utf8" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+</head>
+
+<body>
+    <header>
+        <a href="{{ url_for('admin') }}">
+            <img src="{{url_for('static', filename='redcross.png')}}" alt="logo" class="logo">
+        </a>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('admin') }}">Home</a></li>
+				<li><a href="{{ url_for('donorlog') }}" class="selected">Donor</a></li>
+				<li><a href="{{ url_for('manage') }}">Donor Log</a></li>
+				<li><a href="{{ url_for('patientlog') }}">Patient Accept Table</a></li>
+				<li><a href="{{ url_for('pmanage') }}">Patient Log</a></li>
+                <li><a href="{{ url_for('report') }}">Report</a></li>
+				<li class="login"><a href="{{ url_for('login') }}">Logout</a></li>
+                <li class="profile"><a href="{{ url_for('profile') }}">Profile</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2 style="color: #4a4a4a; font-size: 34px; font-weight:bold; margin-bottom:30px;">Accepted Patient Request</h2>
+
+        <div style="background-color: #ffffff; padding: 30px; border-radius: 8px; margin-bottom: 30px; text-align: center; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); width: 95%; margin-left: auto; margin-right: auto;">
+            <table id="example" class="donors-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Patient Full Name</th>
+                        <th>Age</th>
+                        <th>Blood Type</th>
+                        <th>Number of Units</th>
+                        <th>Hospital</th>
+                        <th>Phone</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="donors-table-body">
+                    {% for data in patientlog %}
+                    <tr>
+                        <td>{{data.id}}</td>
+                        <td>{{data.fullname}}</td>
+                        <td>{{data.age}}</td>
+                        <td>{{ data.bloodtype }}</td>
+                        <td>{{ data.units }}</td>
+                        <td>{{data.hospital}}</td>
+                        <td>{{ data.phone }}</td>
+                        <td>{{ data.Status }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <a href="{{ url_for('admin') }}" class="donate-btn">Home</a>
+        <a href="{{ url_for('pmanage') }}" class="request-btn">Patient Management</a>
+    </main>
+
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable({
+                "aLengthMenu": [[3, 5, 10, 25, -1], [3, 5, 10, 25, "All"]],
+                "iDisplayLength": 3
+            });
+        });
+    </script>
+
+    <footer>
+        <p>© 2023 Blood Management System. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>

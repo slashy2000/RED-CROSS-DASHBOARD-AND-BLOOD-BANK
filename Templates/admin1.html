@@ -1,0 +1,127 @@
+{% extends 'layout.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<h2>Home Page</h2>
+<p>Welcome back, {{ username }}!</p>
+	<script>
+		// Chart.js code
+
+		// Get the canvas element
+		var lineChartCanvas = document.getElementById('lineChart');
+
+		// Create line chart
+		var lineChart = new Chart(lineChartCanvas, {
+			type: 'line',
+			data: {
+				labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+				datasets: [{
+					label: 'Donors per Month',
+					data: [12, 19, 3, 5, 2, 3],
+					borderColor: '#d22a33',
+					backgroundColor: 'rgba(210, 42, 51, 0.2)',
+					fill: true
+				}]
+			},
+			options: {
+				responsive: true,
+				maintainAspectRatio: false,
+				scales: {
+					y: {
+						beginAtZero: true
+					}
+				}
+			}
+		});
+
+		// Age Chart
+		var ageData = {
+			labels: ['18-25', '26-35', '36-45', '45+'],
+			datasets: [{
+				data: [25, 35, 15, 25],
+				backgroundColor: ['#d22a33', '#5f5d5d', '#727f83', '#b92f2f']
+			}]
+		};
+
+		var ageChartCanvas = document.getElementById('ageChart').getContext('2d');
+		new Chart(ageChartCanvas, {
+			type: 'pie',
+			data: ageData,
+			options: {
+				responsive: true,
+				maintainAspectRatio: false
+			}
+		});
+
+		// Address Chart
+		var addressData = {
+			labels: ['City A', 'City B', 'City C'],
+			datasets: [{
+				data: [40, 30, 30],
+				backgroundColor: ['#d22a33', '#5f5d5d', '#727f83']
+			}]
+		};
+
+		var addressChartCanvas = document.getElementById('addressChart').getContext('2d');
+		new Chart(addressChartCanvas, {
+			type: 'pie',
+			data: addressData,
+			options: {
+				responsive: true,
+				maintainAspectRatio: false
+			}
+		});
+
+		// Address Bar Chart
+		var addressBarData = {
+			labels: ['City A', 'City B', 'City C'],
+			datasets: [{
+				label: 'Number of Donors',
+				data: [40, 30, 30],
+				backgroundColor: ['#d22a33', '#5f5d5d', '#727f83']
+			}]
+		};
+
+		var addressBarChartCanvas = document.getElementById('addressBarChart').getContext('2d');
+		new Chart(addressBarChartCanvas, {
+			type: 'bar',
+			data: addressBarData,
+			options: {
+				responsive: true,
+				maintainAspectRatio: false,
+				scales: {
+					y: {
+						beginAtZero: true
+					}
+				}
+			}
+		});
+
+		// Total Donors Chart
+		var totalDonorsData = {
+			labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+			datasets: [{
+				label: 'Total Donors',
+				data: [100, 150, 120, 80, 200, 160, 180, 220, 190, 210, 250, 230],
+				borderColor: '#d22a33',
+				backgroundColor: 'rgba(210, 42, 51, 0.2)',
+				fill: true
+			}]
+		};
+		var totalDonorsChartCanvas = document.getElementById('totalDonorsChart').getContext('2d');
+		new Chart(totalDonorsChartCanvas, {
+			type: 'line',
+			data: totalDonorsData,
+			options: {
+				responsive: true,
+				maintainAspectRatio: false,
+				scales: {
+					y: {
+						beginAtZero: true
+					}
+				}
+			}
+		});
+	</script>
+{% endblock %}

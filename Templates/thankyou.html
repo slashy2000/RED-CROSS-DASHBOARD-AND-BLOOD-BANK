@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Thank You Prompt</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style1.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='donors_table_style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Roboto&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="{{url_for('static', filename='redcross.png')}}" sizes="10x10">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+    <script type="text/javascript" charset="utf8"
+        src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+</head>
+<body>
+<main style="padding: 10px 0;">
+    <div>
+    <a href="{{ url_for('index') }}" class="donate-btn">Go To Home</a>
+    </div>
+    <img src="{{url_for('static', filename='thankyouu.jpg')}}" alt="Donate Image" class="center-image">
+
+</main>
+</body>
+</html>

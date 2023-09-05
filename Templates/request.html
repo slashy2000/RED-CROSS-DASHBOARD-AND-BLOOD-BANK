@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Blood Management System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Roboto&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="{{url_for('static', filename='redcross.png')}}" sizes="10x10">
+</head>
+
+<body>
+    <header>
+       <a href="{{ url_for('index') }}">
+			<img src="{{url_for('static', filename='redcross.png')}}" alt="logo" class="logo">
+        </a>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('bloodbank') }}">Blood Bank Monitoring</a></li>
+				<li><a href="{{ url_for('index') }}">Home</a></li>
+				<li><a href="{{ url_for('donate') }}">Donate</a></li>
+				<li><a href="{{ url_for('request1') }}" class="selected">Patient Request</a></li>
+				<li><a href="{{ url_for('bloodbank') }}">Total Blood Available</a></li>
+				<li class="login"><a href="{{ url_for('login') }}">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main style="padding: 100px 0;">
+        <h2 style="color: #4a4a4a; font-size: 34px; font-weight:bold; margin:0;">Request Blood</h2>
+        <div
+            style="background-color: #ffffff; padding: 30px;  border-radius: 8px; text-align: center; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); width: 60%;  margin-left: auto; margin-right: auto; display: flex;  flex-direction: column;  align-items: center; margin-top:0; margin-bottom: 200px;">
+            <form action="{{url_for('add_patient1')}}" method="POST" class="donor-form">
+                <label for="pname">Patient Name:</label>
+                <input type="text" id="pname" name="pname" required>
+
+                <label for="page">Patient Age:</label>
+                <input type="number" id="page" name="page" required>
+
+                <label for="pbloodtype">Blood Type:</label>
+                <select id="pbloodtype" name="pbloodtype" required>
+                    <option value="">Select Blood Type</option>
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                </select>
+
+                <label for="units">Units Required:</label>
+                <input type="number" id="units" name="units" required>
+
+                <label for="hospital">Hospital:</label>
+                <input type="text" id="hospital" name="hospital" required>
+
+                <label for="pphone">Contact Number:</label>
+                <input type="tel" id="pphone" name="pphone" required>
+
+                <button type="submit" class="donate-btn" href="{{ url_for('thank') }}">Submit Request</button>
+            </form>
+        </div>
+    </main>
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <p>Are you sure you want to submit the form?</p>
+            <div class="modal-buttons">
+                <button id="cancelBtn">Cancel</button>
+                <button id="confirmBtn">Submit</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Get the modal element
+        var modal = document.getElementById("myModal");
+
+        // Get the submit button element
+        var submitBtn = document.getElementById("submitBtn");
+
+        // Get the cancel and confirm buttons from the modal
+        var cancelBtn = document.getElementById("cancelBtn");
+        var confirmBtn = document.getElementById("confirmBtn");
+
+        // When the user clicks the submit button, open the modal
+        submitBtn.addEventListener("click", function () {
+            modal.style.display = "block";
+        });
+
+        // When the user clicks the cancel button, close the modal
+        cancelBtn.addEventListener("click", function () {
+            modal.style.display = "none";
+        });
+
+        // When the user clicks the confirm button, submit the form
+        confirmBtn.addEventListener("click", function () {
+            // Add your form submission logic here
+            // For example, you can use JavaScript to submit the form or make an AJAX request
+            document.querySelector(".donor-form").submit();
+
+            // Close the modal
+            modal.style.display = "none";
+        });
+    </script>
+    <footer>
+        <p>© 2023 Blood Management System. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>

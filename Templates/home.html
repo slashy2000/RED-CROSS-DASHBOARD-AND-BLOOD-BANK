@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Blood Management System</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Roboto&display=swap" rel="stylesheet">
+	<link rel="icon" type="image/png" href="{{url_for('static', filename='redcross.png')}}" sizes="10x10">
+</head>
+<body>
+	<header>
+		<a href="{{ url_for('index') }}">
+			<img src="{{url_for('static', filename='redcross.png')}}" alt="logo" class="logo">
+		</a>
+		<nav>
+			<ul>
+				<li><a href="{{ url_for('bloodbank') }}">Blood Bank Monitoring</a></li>
+				<li><a href="{{ url_for('index') }}" class="selected">Home</a></li>
+				<li><a href="{{ url_for('donate') }}">Donate</a></li>
+				<li><a href="{{ url_for('request1') }}">Patient Request</a></li>
+				<li><a href="{{ url_for('bloodbank') }}">Total Blood Available</a></li>
+				<li class="login"><a href="{{ url_for('login') }}">Login</a></li>
+			</ul>
+		</nav>
+	</header>
+	<main style="padding: 10px 0;">
+			<!-- <div class="total-blood-container">
+				<h2 style="font-size: 34px; font-weight:100; margin:0px;">Total Blood In Bank</h2>
+				<p style="font-size: 30px; font-weight:bold">1289 Pint</p>
+			</div> -->
+			<img src="{{url_for('static', filename='redcross.png')}}" alt="Donate Image" class="center-image">
+
+		<div style="background-color: #ffffff; padding: 30px; border-radius: 8px; margin-bottom: 30px; text-align: center; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); width: 95%; margin-left: auto; margin-right: auto;">
+			<!-- <img src="donate.jpg" alt="Donate Image" class="center-image"> -->
+			<p style="font-size: 24px;">Most people are able to give blood, but only 4% actually do. You can donate blood if you:</p>
+			<ul style="padding-left: 80px;">
+				<li style="font-size: 24px;">are related to Red Cross and blood bank management</li>
+				<li style="font-size: 24px;">Red Cross Information</li>
+				<li style="font-size: 24px;">Information about blood donation</li>
+			</ul>
+			<a href="{{ url_for('donate') }}" class="donate-btn">Donate</a>
+			<a href="{{ url_for('request1') }}" class="donate-btn">Patient Request</a>
+
+
+			<p class="last-updated">Latest donation: May 11, 2023 10:23pm</p>
+            <img src="{{url_for('static', filename='photo3.jpg')}}" alt="Donate Image" class="center-image">
+		</div>
+		<div class="mission-vision-container">
+			<div class="mission">
+				<h2>Mission</h2>
+				<p>To save lives by providing safe blood and blood products in a cost-effective manner utilizing quality management systems as a fulfillment of the social responsibility of the Philippine Red Cross, a humanitarian and voluntary service organization.</p>
+            </div>
+			<div class="vision">
+				<h2>Vision</h2>
+				<p>Philippine Red Cross, the leading provider of safe and quality blood and blood products in the Philippines.</p>
+            </div>
+            <img src="{{url_for('static', filename='photo2.jpg')}}" alt="Donate Image" class="center-image">
+		</div>
+        <div>
+        </div>
+		<div class="republic-acts-container">
+			<div class="republic-act">
+				<h2>Republic Act No. 9208</h2>
+				<p><a href="https://www.officialgazette.gov.ph/2003/05/26/republic-act-no-9208/" target="_blank">AN ACT TO INSTITUTE POLICIES TO ELIMINATE TRAFFICKING IN PERSONS ESPECIALLY WOMEN AND CHILDREN, ESTABLISHING THE NECESSARY INSTITUTIONAL MECHANISMS FOR THE PROTECTION AND SUPPORT OF TRAFFICKED PERSONS, PROVIDING PENALTIES FOR ITS VIOLATIONS, AND FOR OTHER</a></p>
+			<img src="{{url_for('static', filename='photo4.jpg')}}" alt="Donate Image" class="center-image">
+            </div>
+			<div class="republic-act">
+				<h2>Republic Act No. 1517</h2>
+				<p><a href="https://thecorpusjuris.com/legislative/republic-acts/ra-no-1517.php" target="_blank">An Act Regulating the Collection, Processing and Sale of Human Blood, and the Establishment and Operation of Blood Banks and Blood Processing Laboratories</a></p>
+			<img src="{{url_for('static', filename='photo5.jpg')}}" alt="Donate Image" class="center-image">
+            </div>
+		</div>
+	</main>
+	<footer>
+		<p>© 2023 Blood Management System. All rights reserved.</p>
+	</footer>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Report Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style1.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='donors_table_style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Roboto&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="{{url_for('static', filename='redcross.png')}}" sizes="10x10">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+    <script type="text/javascript" charset="utf8"
+        src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+</head>
+
+<body>
+    <header>
+        <a href="{{ url_for('admin') }}">
+			<img src="{{url_for('static', filename='redcross.png')}}" alt="logo" class="logo">
+        </a>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('admin') }}">Home</a></li>
+				<li><a href="{{ url_for('donorlog') }}" class="selected">Donor</a></li>
+				<li><a href="{{ url_for('manage') }}">Donor Log</a></li>
+				<li><a href="{{ url_for('patientlog') }}">Patient Accept Table</a></li>
+				<li><a href="{{ url_for('pmanage') }}">Patient Log</a></li>
+                <li><a href="{{ url_for('report') }}">Report</a></li>
+				<li class="login"><a href="{{ url_for('login') }}">Logout</a></li>
+                <li class="profile"><a href="{{ url_for('profile') }}">Profile</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <a href="{{ url_for('.download_report') }}" class="donate-btn">Generate Donor Report</a>
+
+        <a href="{{ url_for('.download_report1') }}" class="donate-btn">Generate Blood Report</a>
+
+        <a href="{{ url_for('.download_report2') }}" class="donate-btn">Generate Patient Report</a>
+    </main>
+
+    <footer>
+        <p>© 2023 Blood Management System. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>

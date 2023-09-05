@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Blood Management System</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Roboto&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="{{url_for('static', filename='redcross.png')}}" sizes="10x10">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+	<header>
+        <a href="{{ url_for('index') }}">
+			<img src="{{url_for('static', filename='redcross.png')}}" alt="logo" class="logo">
+		</a>
+		<nav>
+			<ul>
+				<li><a href="{{ url_for('bloodbank') }}" class="selected">Blood Bank Monitoring</a></li>
+				<li><a href="{{ url_for('index') }}">Home</a></li>
+				<li><a href="{{ url_for('donate') }}">Donate</a></li>
+				<li><a href="{{ url_for('request1') }}">Patient Request</a></li>
+				<li><a href="{{ url_for('bloodbank') }}">Total Blood Available</a></li>
+				<li class="login"><a href="{{ url_for('login') }}">Login</a></li>
+			</ul>
+		</nav>
+	</header>
+	<main style="padding: 40px 0;">
+        <div class="total-blood-container">
+            <h2 style="font-size: 54px; font-weight:100; margin:0;">Total Blood In Bank</h2>
+            <p style="font-size: 40px; font-weight:bold">{{ total_count }} Pints</p>
+        </div>
+		<div class="center-container">
+                <h2>Total Inventory of Blood</h2>
+                <canvas id="bloodChart"></canvas>
+            </div>
+		</div>
+        <div class="total-blood-container">
+            <h2 style="font-size: 54px; font-weight:100; margin:0;">
+                Active Donors:
+            </h2>
+            <p style="font-size: 40px; font-weight:bold">
+                {{ data }}
+            </p>
+        </div>
+
+        <div class="charts-wrapper">
+            <div class="chart-container">
+                <h3 id="chartHeading">In-Demand Blood Types as of May 2023</h3>
+                <canvas id="bloodTypeChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <h3>Donations by Gender</h3>
+                <canvas id="genderChart"></canvas>
+            </div>
+        </div>        
+
+	</main>
+	<footer>
+		<p>© 2023 Blood Management System. All rights reserved.</p>
+	</footer>
+
+    <script>
+
+        async function totalChart() {
+  const totalbloodResponse = await fetch('/data-blood').then(result => result.json());
+
+  const bloodTypes = Object.keys(totalbloodResponse);
+  const dataValues = Object.values(totalbloodResponse);
+  const numBloodTypes = bloodTypes.length;
+
+  const totalCapacity = 100; // Set the total capacity to 1000
+
+  const remainingSpace = dataValues.map(value => totalCapacity - value); // Calculate the remaining space in each container
+  const totalAndRemaining = remainingSpace.map((value, index) => value + dataValues[index]); // Combine total capacity and remaining space
+
+  const bloodTypeColors = [
+    'rgba(54, 162, 235, 0.7)',
+    'rgba(255, 99, 132, 0.7)',
+    'rgba(255, 206, 86, 0.7)',
+    'rgba(75, 192, 192, 0.7)',
+    'rgba(153, 102, 255, 0.7)',
+    'rgba(255, 159, 64, 0.7)',
+    'rgba(255, 0, 0, 0.7)',
+    'rgba(0, 255, 0, 0.7)'
+  ]; // Add more colors as needed
+
+  const bloodTypeData = {
+    labels: bloodTypes,
+    datasets: [
+      {
+        label: 'Data Value',
+        data: dataValues,
+        backgroundColor: bloodTypeColors.slice(0, numBloodTypes),
+        borderColor: bloodTypeColors.slice(0, numBloodTypes),
+        borderWidth: 1
+      },
+      {
+        label: 'Total Capacity and Remaining Space',
+        data: totalAndRemaining,
+        backgroundColor: 'rgba(128, 128, 128, 0.7)',
+        borderColor: 'rgba(128, 128, 128, 1)',
+        borderWidth: 1
+      }
+    ]
+  };
+
+  const bloodChart = document.getElementById('bloodChart');
+  new Chart(bloodChart, {
+    type: 'bar',
+    data: bloodTypeData,
+    options: {
+      scales: {
+        x: {
+          stacked: true // Stacked bars on the x-axis
+        },
+        y: {
+          stacked: false, // Individual bars on the y-axis
+          beginAtZero: true, // Start y-axis from zero
+          max: totalCapacity // Set the y-axis maximum to the total capacity
+        }
+      },
+      plugins: {
+        legend: {
+          labels: {
+            fontColor: 'black' // Set legend text color to black
+          }
+        }
+      }
+    }
+  });
+}
+
+
+
+           async function totalbloodChart() {
+  const totalbloodResponse = await fetch('/data-blood').then(result => result.json());
+  const bloodTypeLabels = Object.keys(totalbloodResponse);
+  const bloodTypeValues = Object.values(totalbloodResponse);
+
+  const currentDate = getCurrentDate();
+  const chartHeading = document.getElementById('chartHeading');
+  chartHeading.textContent = `In-Demand Blood Types as of ${currentDate}`;
+
+  const bloodTypeData = {
+    labels: bloodTypeLabels.map(label => `${label} - ${currentDate}`),
+    datasets: [{
+      label: `In-Demand Blood Types as of ${currentDate}`,
+      data: bloodTypeValues,
+      backgroundColor: [
+        '#1280f6',
+        '#FFB6C1',
+        '#25a241',
+        '#d4333f',
+        '#e7b51e',
+        '#189cb2',
+        '#E37383',
+        '#900C3F'
+      ]
+    }]
+  };
+
+  const bloodTypeChart = document.getElementById('bloodTypeChart');
+  new Chart(bloodTypeChart, {
+    type: 'bar',
+    data: bloodTypeData
+  });
+}
+
+function getCurrentDate() {
+  const currentDate = new Date();
+  const month = currentDate.toLocaleString('default', { month: 'long' });
+  const year = currentDate.getFullYear();
+  return `${month} ${year}`;
+}
+
+totalbloodChart(); // Call the function to generate the initial chart
+
+// Update the chart heading every month
+setInterval(() => {
+  totalbloodChart();
+}, 1000 * 60 * 60 * 24); // Update every 24 hours (adjust the interval as desired)
+
+
+
+           async function totalageChart() {
+           const ageDataResponse = await fetch('/data-gender').then(result => result.json())
+               .then(data => {
+                   return data;
+            })
+
+           var genderData = {
+               labels: Object.keys(ageDataResponse),
+               datasets: [{
+                   label: 'Donors by Gender',
+                   data: Object.values(ageDataResponse),
+                   backgroundColor: ['#1280f6',
+                                     '#FFB6C1',
+                                     '#25a241',
+                                     '#d4333f',
+                                     '#e7b51e',
+                                     '#189cb2',
+                                     '#E37383',
+                                     '#900C3F']
+               }]
+           };
+
+           var genderChart = document.getElementById('genderChart');
+           new Chart(genderChart, {
+               type: 'bar',
+               data: genderData,
+             });
+       }
+        totalChart()
+        totalbloodChart()
+        totalageChart()
+    </script>
+    
+</body>
+</html>

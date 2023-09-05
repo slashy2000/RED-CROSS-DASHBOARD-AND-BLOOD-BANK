@@ -1,0 +1,52 @@
+{% extends "layout1.html" %}
+{% block body %}
+  <div class="row">
+    <div class="col-md-4 offset-md-4">
+      <div class="card card-body">
+        <form action="/update/{{donor.id}}" method="POST">
+          <div class="form-group">
+              <label>
+                  <input type="text" name="fullname" value="{{donor.name}}" class="form-control">
+              </label>
+          </div>
+            <div class="form-group">
+              <label>
+                  <input type="text" name="age" value="{{donor.age}}" class="form-control">
+              </label>
+          </div>
+          <div class="form-group">
+              <label>
+                  <input type="text" name="gender" value="{{donor.gender}}" class="form-control">
+              </label>
+          </div>
+          <div class="form-group">
+              <label>
+                  <input type="text" name="address" value="{{donor.address}}" class="form-control">
+              </label>
+          </div>
+          <div class="form-group">
+              <label>
+                  <input type="text" name="phone" value="{{donor.phone}}" class="form-control">
+              </label>
+          </div>
+          <div class="form-group">
+              <label>
+                  <input type="text" name="email" value="{{donor.email}}" class="form-control">
+              </label>
+          </div>
+            <div class="form-group">
+              <label>
+                  <input type="text" name="bloodtype" value="{{donor.bloodtype}}" class="form-control">
+              </label>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-block">
+              Update
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

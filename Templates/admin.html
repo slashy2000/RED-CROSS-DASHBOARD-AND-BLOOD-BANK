@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Blood Management System</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='style1.css') }}">
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Roboto&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="{{url_for('static', filename='redcross.png')}}" sizes="10x10">
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+	<header>
+		<a href="{{ url_for('admin') }}">
+			<img src="{{url_for('static', filename='redcross.png')}}" alt="logo" class="logo">
+		</a>
+		<nav>
+			<ul>
+                <li><a href="{{ url_for('admin') }}">Home</a></li>
+				<li><a href="{{ url_for('donorlog') }}" class="selected">Donor</a></li>
+				<li><a href="{{ url_for('manage') }}">Donor Log</a></li>
+				<li><a href="{{ url_for('patientlog') }}">Patient Accept Table</a></li>
+				<li><a href="{{ url_for('pmanage') }}">Patient Log</a></li>
+                <li><a href="{{ url_for('report') }}">Report</a></li>
+				<li class="login"><a href="{{ url_for('login') }}">Logout</a></li>
+                <li class="profile"><a href="{{ url_for('profile') }}">Profile</a></li>
+			</ul>
+		</nav>
+	</header>
+
+	<main>
+		<h3 style="font-size: 34px; font-weight: bold; color: #333; text-align: center; margin: 20px 0;">In-Demand Blood
+			Types</h3>
+
+		<div
+			style="background-color: #ffffff; padding: 30px; border-radius: 8px; margin-bottom: 30px; text-align: center; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); width: 95%; margin-left: auto; margin-right: auto;">
+			<!-- Line Chart -->
+			<canvas id="lineChart"></canvas>
+		</div>
+        <h3 style="font-size: 34px; font-weight: bold; color: #333; text-align: center;">Donor's Age</h3>
+		<div
+            style="background-color: #ffffff; padding: 30px; border-radius: 8px; margin-bottom: 50px; text-align: center; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); width: 95%; margin-left: auto; margin-right: auto; height: 600px;">
+            <canvas id="ageChart"></canvas>
+        </div>
+
+        <h3 style="font-size: 34px; font-weight: bold; color: #333; text-align: center;">Donor's Gender</h3>
+
+        <div
+			style="background-color: #ffffff; padding: 30px; border-radius: 8px; margin-bottom: 50px; text-align: center; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); width: 95%; margin-left: auto; margin-right: auto; height: 600px;">
+            <canvas id="addressChart"></canvas>
+        </div>
+
+		<h3 style="font-size: 34px; font-weight: bold; color: #333; text-align: center; margin: 20px 0;">Donor's Address</h3>
+
+		<div
+			style="background-color: #ffffff; padding: 30px; border-radius: 8px; margin-bottom: 50px; text-align: center; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); width: 95%; margin-left: auto; margin-right: auto; height: 600px;">
+			<canvas id="addressBarChart"></canvas>
+		</div>
+
+		<h3 style="font-size: 34px; font-weight: bold; color: #333; text-align: center; margin: 20px 0;">Total Donors
+			Over Time</h3>
+
+		<div
+			style="background-color: #ffffff; padding: 30px; border-radius: 8px; margin-bottom: 50px; text-align: center; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); width: 95%; margin-left: auto; margin-right: auto;">
+			<canvas id="totalDonorsChart"></canvas>
+		</div>
+	</main>
+	<script>
+		// Chart.js code
+
+		// Get the canvas element
+		var lineChartCanvas = document.getElementById('lineChart');
+
+		// Create line chart
+        async function lineChart() {
+            const registeredDataResponse = await fetch('/data-registeredAt').then(result => result.json())
+                .then(data => {
+                    return data;
+                })
+
+            var lineChart = new Chart(lineChartCanvas, {
+                type: 'line',
+                data: {
+                    labels: Object.keys(registeredDataResponse),
+                    datasets: [{
+                        label: 'Donors per Month',
+                        data: Object.values(registeredDataResponse),
+                        borderColor: '#d22a33',
+                        backgroundColor: 'rgba(210, 42, 51, 0.2)',
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+		// Age Chart
+        async function ageChart() {
+        const ageDataResponse = await fetch('/data-age').then(result => result.json())
+        .then(data => {
+        return data;
+        })
+            const ageRanges = {
+                    "18-25": 0,
+                    "26-35": 0,
+                    "36-45": 0,
+                    "45+": 0
+            };
+
+        for (const age in ageDataResponse) {
+        const count = ageDataResponse[age];
+
+        if (age >= 18 && age <= 25) {
+            ageRanges["18-25"] += count;
+        } else if (age >= 26 && age <= 35) {
+            ageRanges["26-35"] += count;
+        } else if (age >= 36 && age <= 45) {
+            ageRanges["36-45"] += count;
+        } else {
+            ageRanges["45+"] += count;
+        }
+        }
+
+        console.log(ageDataResponse)
+		var ageData = {
+			labels: ['18-25', '26-35', '36-45', '45+'],
+			datasets: [{
+                label: 'Donors Age',
+				data: Object.values(ageRanges),
+				backgroundColor: ['#1280f6',
+                    '#657276',
+                                     '#25a241',
+                                     '#d4333f',
+                                     '#e7b51e',
+                                     '#189cb2',
+                                     '#a6aaa8',
+                                     '#30383b']
+			}]
+		};
+
+
+		var ageChartCanvas = document.getElementById('ageChart').getContext('2d');
+		new Chart(ageChartCanvas, {
+			type: 'bar',
+			data: ageData,
+			options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        }
+
+
+		// Address Chart
+         async function genderChart() {
+             const addressDataResponse = await fetch('/data-gender').then(result => result.json())
+                 .then(data => {
+                     return data;
+                 })
+
+             var addressData = {
+                 labels: Object.keys(addressDataResponse),
+                 datasets: [{
+                     label: 'Donor Gender',
+                     data: Object.values(addressDataResponse),
+                     backgroundColor: ['#1280f6',
+                         '#657276',
+                         '#25a241',
+                         '#d4333f',
+                         '#e7b51e',
+                         '#189cb2',
+                         '#a6aaa8',
+                         '#30383b']
+                 }]
+             };
+
+             var addressChartCanvas = document.getElementById('addressChart').getContext('2d');
+             new Chart(addressChartCanvas, {
+                 type: 'bar',
+                 data: addressData,
+                 options: {
+                     responsive: true,
+                     maintainAspectRatio: false,
+                     scales: {
+                         y: {
+                             beginAtZero: true
+                         }
+                     }
+                 }
+             });
+         }
+        // Address Bar Chart
+         async function addressBarChart() {
+             const addressDatabarResponse = await fetch('/data-addressbar').then(result => result.json())
+                 .then(data => {
+                     return data;
+                 })
+
+             var addressBarData = {
+                 labels: Object.keys(addressDatabarResponse),
+                 datasets: [{
+                     label: 'Number of Donors',
+                     data: Object.values(addressDatabarResponse),
+                     backgroundColor: ['#1280f6',
+                                     '#657276',
+                                     '#25a241',
+                                     '#d4333f',
+                                     '#e7b51e',
+                                     '#189cb2',
+                                     '#a6aaa8',
+                                     '#30383b']
+                 }]
+             };
+
+             var addressBarChartCanvas = document.getElementById('addressBarChart').getContext('2d');
+             new Chart(addressBarChartCanvas, {
+                 type: 'bar',
+                 data: addressBarData,
+                 options: {
+                     responsive: true,
+                     maintainAspectRatio: false,
+                     scales: {
+                         y: {
+                             beginAtZero: true
+                         }
+                     }
+                 }
+             });
+         }
+
+		// Total Donors Chart
+         async function totalDonorsChart() {
+             const totalDonorsResponse = await fetch('/data-totaldonor').then(result => result.json())
+                 .then(data => {
+                     return data;
+                 })
+
+             var totaldonorsdata = {
+                 labels: Object.keys(totalDonorsResponse),
+                 datasets: [{
+                     label: 'Total Donors',
+                     data: Object.values(totalDonorsResponse),
+                     borderColor: '#d22a33',
+                     backgroundColor: 'rgba(210, 42, 51, 0.2)',
+                     fill: true
+                 }]
+             };
+
+             var totalDonorsChartCanvas = document.getElementById('totalDonorsChart').getContext('2d');
+             new Chart(totalDonorsChartCanvas, {
+                 type: 'line',
+                 data: totaldonorsdata,
+                 options: {
+                     responsive: true,
+                     maintainAspectRatio: false,
+                     scales: {
+                         y: {
+                             beginAtZero: true
+                         }
+                     }
+                 }
+             });
+         }
+        ageChart()
+        genderChart()
+        lineChart()
+        addressBarChart()
+        totalDonorsChart()
+
+	</script>
+	<footer>
+		<p>© 2023 Blood Management System. All rights reserved.</p>
+	</footer>
+</body>
+
+</html>
